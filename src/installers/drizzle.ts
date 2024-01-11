@@ -33,7 +33,7 @@ export const drizzleInstaller: DbInstaller = (
 		});
 		addPackageDependency({
 			projectDir,
-			dependencies: ["drizzle-orm"],
+			dependencies: ["drizzle-orm", "postgres"],
 			devMode: false,
 		});
 	}
@@ -57,7 +57,10 @@ export const drizzleInstaller: DbInstaller = (
 	let configContent = fs.readFileSync(configFile, "utf-8");
 	configContent = configContent.replace("project1_*", `${scopedAppName}_*`);
 
-	const clientSrc = path.join(extrasDir, "src/server/db/index-drizzle.ts");
+	const clientSrc = path.join(
+		extrasDir,
+		`src/server/db/index-drizzle-${type}.ts`
+	);
 	const clientDest = path.join(projectDir, "src/server/db/index.ts");
 
 	const pkgJsonPath = path.join(projectDir, "package.json");

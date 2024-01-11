@@ -1,15 +1,11 @@
-# create-z0-app
+# Next+
 
-To install dependencies:
+Welcome to the Next+ CLI tool. A supercharged alternative to create-next-app.
 
-```bash
-bun install
+To get started:
+
 ```
-
-To run:
-
-```bash
-bun run index.ts
+bunx create next-plus
 ```
 
 This project was created using `bun init` in bun v1.0.20. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
