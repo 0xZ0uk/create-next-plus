@@ -1,5 +1,5 @@
-import fireBase from "firebase/app";
-import "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const env = Bun.env;
 
@@ -13,8 +13,8 @@ const firebaseConfig = {
 	measurementId: env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
-if (!fireBase.apps.length) {
-	fireBase.initializeApp(firebaseConfig);
-}
+const app = initializeApp(firebaseConfig);
 
-export const firebase;
+export const firestore = getFirestore(app);
+
+export default firestore;

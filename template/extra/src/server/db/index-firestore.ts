@@ -1,6 +1,4 @@
-import firebase from "@/lib/firebase";
-
-const firestore = firebase.firestore();
+import firestore from "@/lib/firebase";
 
 export const db = {
 	// Define your Firestore interactions here, such as functions to get, set, update, delete documents
