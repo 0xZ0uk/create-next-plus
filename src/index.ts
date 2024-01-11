@@ -1,4 +1,7 @@
-import { Clerc } from "clerc";
+import { Clerc, Root } from "clerc";
+import { completionsPlugin } from "@clerc/plugin-completions";
+import { helpPlugin } from "@clerc/plugin-help";
+import { versionPlugin } from "@clerc/plugin-version";
 import path from "node:path";
 
 import { getVersion } from "./utils/version";
@@ -19,7 +22,10 @@ export const cli = Clerc.create()
 	.scriptName("create-next-plus")
 	.description("A simple CLI tool to initiate a Next+ app")
 	.version(await getVersion())
-	.command("create", "start a Next+ project", {
+	.use(helpPlugin())
+	.use(versionPlugin())
+	.use(completionsPlugin())
+	.command(Root, "Need help?", {
 		flags: {
 			noGit: {
 				type: Boolean,
@@ -33,7 +39,7 @@ export const cli = Clerc.create()
 			},
 		},
 	})
-	.on("create", async (ctx) => {
+	.on(Root, async (ctx) => {
 		await intro();
 		const { name, noGit, noInstall, db, extras } = await init(ctx.flags);
 
