@@ -1,0 +1,30 @@
+{
+  "name": "create-next-plus",
+  "version": "0.0.1",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "create": "bun src/index.ts create",
+    "help": "bun src/index.ts help"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/chalk-animation": "^1.6.3",
+    "@types/figlet": "^1.5.8",
+    "@types/gradient-string": "^1.1.5",
+    "@types/prompts": "^2.4.9"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/ncp": "^2.0.8",
+    "chalk": "^5.3.0",
+    "chalk-animation": "^2.0.3",
+    "clerc": "^0.42.2",
+    "figlet": "^1.7.0",
+    "gradient-string": "^2.0.2",
+    "ncp": "^2.0.0",
+    "prompts": "^2.4.2"
+  }
+}
