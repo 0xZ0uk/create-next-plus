@@ -12,6 +12,7 @@ import { drizzleInstaller } from "./installers/drizzle";
 import { firestoreInstaller } from "./installers/firestore";
 import { langchainInstaller } from "./installers/langchain";
 import { zustandInstaller } from "./installers/zustand";
+import { millionInstaller } from "./installers/million";
 
 export const cli = Clerc.create()
 	.name("Create Next+")
@@ -81,6 +82,16 @@ export const cli = Clerc.create()
 
 		if (extras.include("zustand")) {
 			zustandInstaller({
+				noInstall,
+				pkgManager: "bun",
+				projectDir: projectPath,
+				projectName: name,
+				scopedAppName: name,
+			});
+		}
+
+		if (extras.include("millionjs")) {
+			millionInstaller({
 				noInstall,
 				pkgManager: "bun",
 				projectDir: projectPath,

@@ -15,5 +15,6 @@ export const dependencyVersionMap = {
 	"@langchain/openai": "^0.0.11",
 	"@redux-devtools/extension": "^3.3.0",
 	zustand: "^4.4.7",
+	million: "^2.6.4",
 } as const;
 export type AvailableDependencies = keyof typeof dependencyVersionMap;

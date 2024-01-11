@@ -57,10 +57,6 @@ export const init = async (defaultFlags: {
 					value: "langchain",
 				},
 				{
-					title: "next-auth",
-					value: "nextauth",
-				},
-				{
 					title: "million.js",
 					value: "millionjs",
 				},
