@@ -10,6 +10,8 @@ import { log } from "./utils/log";
 import { installDependencies } from "./actions/deps";
 import { drizzleInstaller } from "./installers/drizzle";
 import { firestoreInstaller } from "./installers/firestore";
+import { langchainInstaller } from "./installers/langchain";
+import { zustandInstaller } from "./installers/zustand";
 
 export const cli = Clerc.create()
 	.name("Create Next+")
@@ -66,6 +68,26 @@ export const cli = Clerc.create()
 				projectName: name,
 				scopedAppName: name,
 			});
+
+		if (extras.includes("langchain")) {
+			langchainInstaller({
+				noInstall,
+				pkgManager: "bun",
+				projectDir: projectPath,
+				projectName: name,
+				scopedAppName: name,
+			});
+		}
+
+		if (extras.include("zustand")) {
+			zustandInstaller({
+				noInstall,
+				pkgManager: "bun",
+				projectDir: projectPath,
+				projectName: name,
+				scopedAppName: name,
+			});
+		}
 
 		log("Congratulations! Everything is setup.", { gradient: true });
 	})
