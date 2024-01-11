@@ -64,8 +64,10 @@ export const drizzleInstaller: DbInstaller = (
 	);
 	const clientDest = path.join(projectDir, "src/server/db/index.ts");
 
-	const pkgJsonPath = path.join(projectDir, "package.json");
+	const trpcSrc = path.join(extrasDir, "src/server/trpc/with-drizzle.ts");
+	const trpcDest = path.join(projectDir, "src/server/trpc.ts");
 
+	const pkgJsonPath = path.join(projectDir, "package.json");
 	const pkgJsonContent = fs.readJSONSync(pkgJsonPath) as PackageJson;
 	pkgJsonContent.scripts = {
 		...pkgJsonContent.scripts,
@@ -78,6 +80,7 @@ export const drizzleInstaller: DbInstaller = (
 	fs.writeFileSync(schemaDest, schemaContent);
 	fs.writeFileSync(configDest, configContent);
 	fs.copySync(clientSrc, clientDest);
+	fs.copySync(trpcSrc, trpcDest);
 	fs.writeJSONSync(pkgJsonPath, pkgJsonContent, {
 		spaces: 2,
 	});
