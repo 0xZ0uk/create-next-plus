@@ -5,12 +5,13 @@ import { type PackageJson } from "type-fest";
 import type { DbInstaller } from ".";
 import { addPackageDependency } from "../utils/deps";
 import { PKG_ROOT } from "../utils/path";
+import { log } from "../utils/log";
 
 export const drizzleInstaller: DbInstaller = (
 	{ projectDir, scopedAppName },
 	type
 ) => {
-	const extrasDir = path.join(PKG_ROOT, "template/extras");
+	const extrasDir = path.join(PKG_ROOT, "template/extra");
 
 	if (type === "ps") {
 		addPackageDependency({
@@ -80,4 +81,6 @@ export const drizzleInstaller: DbInstaller = (
 	fs.writeJSONSync(pkgJsonPath, pkgJsonContent, {
 		spaces: 2,
 	});
+
+	log("Drizzle has been installed and setup.", { gradient: true });
 };

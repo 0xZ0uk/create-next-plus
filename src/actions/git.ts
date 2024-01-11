@@ -90,7 +90,7 @@ export const initGit = async (projectPath: string) => {
 			message: chalk.redBright.bold(
 				`Directory ${chalk.cyan(
 					dirName
-				)} is inside a git worktree. Do you want to initialize it as a git repository?`
+				)} is inside a git worktree. Do you want to initialize it as a git repository?\n`
 			),
 		});
 

@@ -8,6 +8,7 @@ import { create } from "./actions/create";
 import { initGit } from "./actions/git";
 import { log } from "./utils/log";
 import { installDependencies } from "./actions/deps";
+import { drizzleInstaller } from "./installers/drizzle";
 
 export const cli = Clerc.create()
 	.name("Create Next+")
@@ -43,6 +44,18 @@ export const cli = Clerc.create()
 		if (!ctx.flags.noInstall || !noInstall) {
 			await installDependencies(projectPath);
 		}
+
+		if (!!db)
+			drizzleInstaller(
+				{
+					noInstall,
+					pkgManager: "bun",
+					projectDir: projectPath,
+					projectName: name,
+					scopedAppName: name,
+				},
+				db
+			);
 
 		log("Congratulations! Everything is setup.", { gradient: true });
 	})

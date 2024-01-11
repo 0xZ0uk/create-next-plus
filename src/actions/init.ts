@@ -32,12 +32,15 @@ export const init = async (defaultFlags: {
 			choices: [
 				{
 					title: "supabase",
+					value: "sb",
 				},
 				{
 					title: "firestore",
+					value: "fs",
 				},
 				{
 					title: "planetscale",
+					value: "ps",
 				},
 			],
 		},
