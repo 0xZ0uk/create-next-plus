@@ -9,6 +9,7 @@ import { initGit } from "./actions/git";
 import { log } from "./utils/log";
 import { installDependencies } from "./actions/deps";
 import { drizzleInstaller } from "./installers/drizzle";
+import { firestoreInstaller } from "./installers/firestore";
 
 export const cli = Clerc.create()
 	.name("Create Next+")
@@ -45,7 +46,7 @@ export const cli = Clerc.create()
 			await installDependencies(projectPath);
 		}
 
-		if (!!db)
+		if (!!db && db !== "fs")
 			drizzleInstaller(
 				{
 					noInstall,
@@ -56,6 +57,15 @@ export const cli = Clerc.create()
 				},
 				db
 			);
+
+		if (!!db && db === "fs")
+			firestoreInstaller({
+				noInstall,
+				pkgManager: "bun",
+				projectDir: projectPath,
+				projectName: name,
+				scopedAppName: name,
+			});
 
 		log("Congratulations! Everything is setup.", { gradient: true });
 	})

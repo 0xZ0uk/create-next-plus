@@ -64,7 +64,7 @@ export const drizzleInstaller: DbInstaller = (
 	);
 	const clientDest = path.join(projectDir, "src/server/db/index.ts");
 
-	const trpcSrc = path.join(extrasDir, "src/server/trpc/with-drizzle.ts");
+	const trpcSrc = path.join(extrasDir, "src/server/trpc/with-db.ts");
 	const trpcDest = path.join(projectDir, "src/server/trpc.ts");
 
 	const pkgJsonPath = path.join(projectDir, "package.json");

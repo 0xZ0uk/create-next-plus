@@ -7,6 +7,7 @@ export const dependencyVersionMap = {
 	"@planetscale/database": "^1.11.0",
 	"drizzle-orm": "^0.29.3",
 	"drizzle-kit": "^0.20.9",
+	firebase: "^10.7.1",
 	mysql2: "^3.6.1",
 	pg: "^8.11.3",
 	postgres: "^3.4.3",
