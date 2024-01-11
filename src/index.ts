@@ -1,9 +1,13 @@
 import { Clerc } from "clerc";
+import path from "node:path";
 
 import { getVersion } from "./utils/version";
 import { intro } from "./actions/intro";
 import { init } from "./actions/init";
 import { create } from "./actions/create";
+import { initGit } from "./actions/git";
+import { log } from "./utils/log";
+import { installDependencies } from "./actions/deps";
 
 export const cli = Clerc.create()
 	.name("Create Next+")
@@ -29,5 +33,17 @@ export const cli = Clerc.create()
 		const { name, noGit, noInstall, db, extras } = await init(ctx.flags);
 
 		await create({ name });
+
+		const projectPath = path.join(process.cwd(), name);
+
+		if (!ctx.flags.noGit || !noGit) {
+			await initGit(projectPath);
+		}
+
+		if (!ctx.flags.noInstall || !noInstall) {
+			await installDependencies(projectPath);
+		}
+
+		log("Congratulations! Everything is setup.", { gradient: true });
 	})
 	.parse();

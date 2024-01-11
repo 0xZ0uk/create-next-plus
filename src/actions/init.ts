@@ -42,7 +42,7 @@ export const init = async (defaultFlags: {
 			],
 		},
 		{
-			type: "select",
+			type: "multiselect",
 			name: "extras",
 			message: "Do you want to install any extras?",
 			choices: [

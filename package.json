@@ -18,11 +18,14 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/ncp": "^2.0.8",
     "chalk": "^5.3.0",
     "chalk-animation": "^2.0.3",
     "clerc": "^0.42.2",
+    "execa": "^8.0.1",
     "figlet": "^1.7.0",
+    "fs-extra": "^11.2.0",
     "gradient-string": "^2.0.2",
     "ncp": "^2.0.0",
     "prompts": "^2.4.2"
