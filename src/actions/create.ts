@@ -28,7 +28,5 @@ export const create = async ({ name }: { name: string }) => {
 			console.error(chalk.red(`Error copying template files: ${err}`));
 			process.exit(1);
 		}
-
-		log("Project created successfully", { gradient: true });
 	});
 };

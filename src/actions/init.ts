@@ -23,23 +23,26 @@ export const init = async (defaultFlags: {
 		{
 			type: "confirm",
 			name: "db-confirm",
-			message: "Do you want to start with a pre-configured database?",
+			message: "Do you want to start with a database?",
 		},
 		{
 			type: (prev) => (prev === true ? "select" : null),
 			name: "db",
-			message: "Please select a dabatase: ",
+			message: "Please select a dabatase provider: ",
 			choices: [
 				{
 					title: "supabase",
+					description: "Supabase (Postgres)",
 					value: "sb",
 				},
 				{
 					title: "firestore",
+					description: "Firestore (NoSQL)",
 					value: "fs",
 				},
 				{
 					title: "planetscale",
+					description: "PlanetScale (MySQL)",
 					value: "ps",
 				},
 			],
@@ -51,12 +54,19 @@ export const init = async (defaultFlags: {
 			choices: [
 				{
 					title: "langchain",
+					value: "langchain",
 				},
 				{
 					title: "next-auth",
+					value: "nextauth",
 				},
 				{
 					title: "million.js",
+					value: "millionjs",
+				},
+				{
+					title: "zustand",
+					value: "zustand",
 				},
 			],
 		},
