@@ -1,111 +1,12 @@
-import { Clerc, Root } from "clerc";
-import { completionsPlugin } from "@clerc/plugin-completions";
-import { helpPlugin } from "@clerc/plugin-help";
-import { versionPlugin } from "@clerc/plugin-version";
-import path from "node:path";
+#! /usr/bin/env node
 
-import { getVersion } from "./utils/version";
-import { intro } from "./actions/intro";
-import { init } from "./actions/init";
-import { create } from "./actions/create";
-import { initGit } from "./actions/git";
-import { log } from "./utils/log";
-import { installDependencies } from "./actions/deps";
-import { drizzleInstaller } from "./installers/drizzle";
-import { firestoreInstaller } from "./installers/firestore";
-import { langchainInstaller } from "./installers/langchain";
-import { zustandInstaller } from "./installers/zustand";
-import { millionInstaller } from "./installers/million";
+import { runCli } from "./cli";
 
-export const cli = Clerc.create()
-	.name("Create Next+")
-	.scriptName("create-next-plus")
-	.description("A simple CLI tool to initiate a Next+ app")
-	.version(await getVersion())
-	.use(helpPlugin())
-	.use(versionPlugin())
-	.use(completionsPlugin())
-	.command(Root, "Need help?", {
-		flags: {
-			noGit: {
-				type: Boolean,
-				default: false,
-				description: "Skip git initiliazation",
-			},
-			noInstall: {
-				type: Boolean,
-				default: false,
-				description: "Skip dependency installation",
-			},
-		},
-	})
-	.on(Root, async (ctx) => {
-		await intro();
-		const { name, noGit, noInstall, db, extras } = await init(ctx.flags);
+const main = async () => {
+	await runCli();
+};
 
-		await create({ name });
-
-		const projectPath = path.join(process.cwd(), name);
-
-		if (!ctx.flags.noGit || !noGit) {
-			await initGit(projectPath);
-		}
-
-		if (!ctx.flags.noInstall || !noInstall) {
-			await installDependencies(projectPath);
-		}
-
-		if (!!db && db !== "fs")
-			drizzleInstaller(
-				{
-					noInstall,
-					pkgManager: "bun",
-					projectDir: projectPath,
-					projectName: name,
-					scopedAppName: name,
-				},
-				db
-			);
-
-		if (!!db && db === "fs")
-			firestoreInstaller({
-				noInstall,
-				pkgManager: "bun",
-				projectDir: projectPath,
-				projectName: name,
-				scopedAppName: name,
-			});
-
-		if (extras.includes("langchain")) {
-			langchainInstaller({
-				noInstall,
-				pkgManager: "bun",
-				projectDir: projectPath,
-				projectName: name,
-				scopedAppName: name,
-			});
-		}
-
-		if (extras.include("zustand")) {
-			zustandInstaller({
-				noInstall,
-				pkgManager: "bun",
-				projectDir: projectPath,
-				projectName: name,
-				scopedAppName: name,
-			});
-		}
-
-		if (extras.include("millionjs")) {
-			millionInstaller({
-				noInstall,
-				pkgManager: "bun",
-				projectDir: projectPath,
-				projectName: name,
-				scopedAppName: name,
-			});
-		}
-
-		log("Congratulations! Everything is setup.", { gradient: true });
-	})
-	.parse();
+main().catch((err) => {
+	console.error("Aborting installation, due to error: ", err);
+	process.exit(1);
+});

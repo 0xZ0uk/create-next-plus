@@ -1,6 +1,5 @@
 import path from "node:path";
 import fs from "fs-extra";
-import { type PackageJson } from "type-fest";
 
 import type { DbInstaller } from ".";
 import { addPackageDependency } from "../utils/deps";
@@ -68,7 +67,7 @@ export const drizzleInstaller: DbInstaller = (
 	const trpcDest = path.join(projectDir, "src/server/trpc.ts");
 
 	const pkgJsonPath = path.join(projectDir, "package.json");
-	const pkgJsonContent = fs.readJSONSync(pkgJsonPath) as PackageJson;
+	const pkgJsonContent = fs.readJSONSync(pkgJsonPath);
 	pkgJsonContent.scripts = {
 		...pkgJsonContent.scripts,
 		"db:push": type === "sb" ? "drizzle-kit push:pg" : "drizzle-kit push:mysql",

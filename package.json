@@ -1,11 +1,32 @@
 {
 	"name": "create-next-plus",
-	"version": "1.0.0",
-	"module": "index.ts",
+	"version": "1.0.4",
 	"type": "module",
+	"exports": "./dist/index.js",
+	"main": "./dist/index.js",
+	"keywords": [
+		"create-next-plus",
+		"next.js",
+		"next-plus",
+		"tailwind",
+		"tRPC",
+		"typescript",
+		"bun"
+	],
+	"bin": {
+		"create-next-plus": "./dist/index.js"
+	},
+	"license": "MIT",
 	"scripts": {
-		"create": "bun src/index.ts create",
-		"help": "bun src/index.ts help"
+		"typecheck": "tsc",
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"clean": "rm -rf dist .turbo node_modules",
+		"lint": "eslint . --ext .ts,.tsx",
+		"lint:fix": "bun lint --fix",
+		"format": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ../.gitignore --ignore-unknown --no-error-on-unmatched-pattern --write",
+		"format:check": "prettier '**/*.{cjs,mjs,ts,tsx,md,json}' --ignore-path ../.gitignore --ignore-unknown --no-error-on-unmatched-pattern --check",
+		"release": "changeset version"
 	},
 	"devDependencies": {
 		"@types/bun": "latest",
@@ -18,21 +39,17 @@
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
-		"@clerc/plugin-completions": "^0.42.2",
-		"@clerc/plugin-help": "^0.42.2",
-		"@clerc/plugin-version": "^0.42.2",
 		"@types/fs-extra": "^11.0.4",
 		"@types/ncp": "^2.0.8",
 		"chalk": "^5.3.0",
 		"chalk-animation": "^2.0.3",
-		"clerc": "^0.42.2",
+		"commander": "^11.1.0",
 		"execa": "^8.0.1",
 		"figlet": "^1.7.0",
 		"fs-extra": "^11.2.0",
 		"gradient-string": "^2.0.2",
-		"ncp": "^2.0.0",
 		"prompts": "^2.4.2",
 		"sort-package-json": "^2.6.0",
-		"type-fest": "^4.9.0"
+		"tsup": "^8.0.1"
 	}
 }
