@@ -13,6 +13,7 @@ import { millionInstaller } from "./installers/million";
 import { zustandInstaller } from "./installers/zustand";
 import { log } from "./utils/log";
 import { getVersion } from "./utils/version";
+import { shadcnInstaller } from "./installers/shadcn";
 
 const program = new Command();
 
@@ -35,16 +36,8 @@ export const runCli = async (): Promise<any> => {
 
 			const projectPath = path.join(process.cwd(), name);
 
-			if (!opts.noGit) {
-				await initGit(projectPath);
-			}
-
-			if (!opts.noInstall) {
-				await installDependencies(projectPath);
-			}
-
 			if (db && db !== "fs") {
-				drizzleInstaller(
+				await drizzleInstaller(
 					{
 						noInstall: opts.noInstall,
 						pkgManager: "bun",
@@ -57,7 +50,7 @@ export const runCli = async (): Promise<any> => {
 			}
 
 			if (db === "fs") {
-				firestoreInstaller({
+				await firestoreInstaller({
 					noInstall: opts.noInstall,
 					pkgManager: "bun",
 					projectDir: projectPath,
@@ -67,7 +60,7 @@ export const runCli = async (): Promise<any> => {
 			}
 
 			if (extras.includes("langchain")) {
-				langchainInstaller({
+				await langchainInstaller({
 					noInstall: opts.noInstall,
 					pkgManager: "bun",
 					projectDir: projectPath,
@@ -77,7 +70,7 @@ export const runCli = async (): Promise<any> => {
 			}
 
 			if (extras.includes("zustand")) {
-				zustandInstaller({
+				await zustandInstaller({
 					noInstall: opts.noInstall,
 					pkgManager: "bun",
 					projectDir: projectPath,
@@ -87,13 +80,31 @@ export const runCli = async (): Promise<any> => {
 			}
 
 			if (extras.includes("millionjs")) {
-				millionInstaller({
+				await millionInstaller({
 					noInstall: opts.noInstall,
 					pkgManager: "bun",
 					projectDir: projectPath,
 					projectName: name,
 					scopedAppName: name,
 				});
+			}
+
+			if (extras.includes("shadcnui")) {
+				await shadcnInstaller({
+					noInstall: opts.noInstall,
+					pkgManager: "bun",
+					projectDir: projectPath,
+					projectName: name,
+					scopedAppName: name,
+				});
+			}
+
+			if (!opts.noGit) {
+				await initGit(projectPath);
+			}
+
+			if (!opts.noInstall) {
+				await installDependencies(projectPath);
 			}
 
 			log("Congratulations! Everything is setup.", { gradient: true });

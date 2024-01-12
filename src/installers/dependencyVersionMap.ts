@@ -16,5 +16,10 @@ export const dependencyVersionMap = {
 	"@redux-devtools/extension": "^3.3.0",
 	zustand: "^4.4.7",
 	million: "^2.6.4",
+	"tailwindcss-animate": "^1.0.7",
+	"class-variance-authority": "^0.7.0",
+	clsx: "^2.1.0",
+	"tailwind-merge": "^2.2.0",
+	"lucide-react": "^0.309.0",
 } as const;
 export type AvailableDependencies = keyof typeof dependencyVersionMap;

@@ -64,6 +64,10 @@ export const init = async (defaultFlags: {
 					title: "zustand",
 					value: "zustand",
 				},
+				{
+					title: "shadcn/ui",
+					value: "shadcnui",
+				},
 			],
 		},
 	]);
