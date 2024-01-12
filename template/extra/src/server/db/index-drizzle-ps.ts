@@ -5,7 +5,7 @@ import * as schema from "./schema";
 
 export const db = drizzle(
 	new Client({
-		url: Bun.env.DATABASE_URL,
+		url: process.env.DATABASE_URL,
 	}).connection(),
 	{ schema }
 );

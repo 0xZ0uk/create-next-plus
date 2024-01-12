@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-const env = Bun.env;
+const env = process.env;
 
 const firebaseConfig = {
 	apiKey: env.NEXT_PUBLIC_FIREBASE_API_KEY,
