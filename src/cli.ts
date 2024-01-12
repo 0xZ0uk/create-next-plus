@@ -13,7 +13,6 @@ import { millionInstaller } from "./installers/million";
 import { zustandInstaller } from "./installers/zustand";
 import { log } from "./utils/log";
 import { getVersion } from "./utils/version";
-import chalk from "chalk";
 
 const program = new Command();
 
